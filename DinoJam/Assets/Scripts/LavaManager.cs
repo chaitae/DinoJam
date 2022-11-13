@@ -12,10 +12,7 @@ public class LavaManager: MonoBehaviour
         new Vector3Int(0, -1, 0)
     };
 
-    public Tilemap tilemap;
-    [Space]
-    public Tile trenchTile;
-    public Tile lavaTile;
+    private Tilemap tilemap => LevelManager.instance.tilemap;
 
     public void Update()
     {
@@ -34,7 +31,7 @@ public class LavaManager: MonoBehaviour
             return;
         }
 
-        tilemap.SetTile(position, lavaTile);
+        tilemap.SetTile(position, trenchTile.lavaTile);
         StartCoroutine(TriggerNeighbors(trenchTile.flowDelaySeconds, position));
     }
 

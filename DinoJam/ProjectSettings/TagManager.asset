@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Dinos
+    uniqueID: 1704928719
+    locked: 0

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc54923da6baac4ab250d153d30cb7c, type: 3}
-  m_Name: TrenchTile
+  m_Script: {fileID: 11500000, guid: 10537950467916e4894e4ffee6d1d3e5, type: 3}
+  m_Name: LavaTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -4568997659432007778, guid: a89d756ecc12fab46b4507490c1452dd, type: 3}
+  m_Sprite: {fileID: -4890418638889193237, guid: a89d756ecc12fab46b4507490c1452dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,5 +34,3 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  lavaTile: {fileID: 11400000, guid: 2a9ac7c462025db46805e530b47c81f4, type: 2}
-  flowDelaySeconds: 0.25
