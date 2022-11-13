@@ -12,7 +12,7 @@ public class LavaManager: MonoBehaviour
         new Vector3Int(0, -1, 0)
     };
 
-    private Tilemap tilemap => LevelManager.instance.tilemap;
+    private Tilemap tilemap => LevelManager.Instance.tilemap;
 
     public void Update()
     {

@@ -5,8 +5,9 @@ public class BasicDino : MonoBehaviour
 {
     private enum DinoState
     {
-        Normal,
-        Fire
+        Alive,
+        Fire,
+        Dead
     }
 
     /*
@@ -28,6 +29,7 @@ public class BasicDino : MonoBehaviour
     public Color fireColor;
     [Space]
     public OnFireListener[] onFireListeners;
+    public OnDeathListener[] onDeathListeners;
 
     private bool isMoving;
     private float moveSpeed;
@@ -36,11 +38,11 @@ public class BasicDino : MonoBehaviour
     private float moveTimer;
     private DinoState state;
 
-    private Tilemap tilemap => LevelManager.instance.tilemap;
+    private Tilemap tilemap => LevelManager.Instance.tilemap;
 
     public void Awake()
     {
-        state = DinoState.Normal;
+        state = DinoState.Alive;
         isMoving = false;
         CalculateMovement();
     }
@@ -48,7 +50,7 @@ public class BasicDino : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         BasicDino otherDino = other.GetComponent<BasicDino>();
-        if (otherDino == null || state == DinoState.Normal)
+        if (otherDino == null || state != DinoState.Fire)
             return;
         otherDino.SetOnFire();
     }
@@ -66,9 +68,21 @@ public class BasicDino : MonoBehaviour
         CheckPosition();
     }
 
+    public void Kill()
+    {
+        if (state == DinoState.Dead)
+            return;
+        state = DinoState.Dead;
+        CalculateMovement();
+        foreach(OnDeathListener onDeathListener in onDeathListeners)
+        {
+            onDeathListener.Killed();
+        }
+    }
+
     public void SetOnFire()
     {
-        if(state == DinoState.Fire)
+        if(state == DinoState.Fire || state == DinoState.Dead)
             return;
         state = DinoState.Fire;
         spriteRenderer.color = fireColor;
@@ -83,37 +97,41 @@ public class BasicDino : MonoBehaviour
     {
         isMoving = !isMoving;
         moveTimer = 0;
-        if(state == DinoState.Fire)
+        moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        switch(state)
         {
-            moveSpeed = fireMoveSpeed;
-            moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-            rigidbody.velocity = moveDirection * moveSpeed;
-            maxMoveTimer = Random.Range(minMoveTime, maxMoveTime);
-            return;
-        }
+            case DinoState.Fire:
+                moveSpeed = fireMoveSpeed;
+                maxMoveTimer = Random.Range(minMoveTime, maxMoveTime);
+                break;
+            case DinoState.Alive:
+                if(isMoving)
+                {
+                    moveSpeed = defaultMoveSpeed;
+                    maxMoveTimer = Random.Range(minMoveTime, maxMoveTime);
+                }
+                else
+                {
+                    moveSpeed = 0;
+                    maxMoveTimer = Random.Range(minWaitTime, maxWaitTime);
+                }
+                break;
+            case DinoState.Dead:
+                moveSpeed = 0;
+                maxMoveTimer = float.MaxValue;
+                break;
 
-        if(isMoving)
-        {
-            moveSpeed = defaultMoveSpeed;
-            moveDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
-            rigidbody.velocity = moveDirection * moveSpeed;
-            maxMoveTimer = Random.Range(minMoveTime, maxMoveTime);
         }
-        else
-        {
-            moveSpeed = 0;
-            maxMoveTimer = Random.Range(minWaitTime, maxWaitTime);
-            rigidbody.velocity = moveDirection * moveSpeed;
-        }
+        rigidbody.velocity = moveDirection * moveSpeed;
     }
 
     private void CheckPosition()
     {
         Vector3 newPosition = transform.position;
         newPosition.z = 0;
-        if (LevelManager.instance.levelBounds.Contains(newPosition))
+        if (LevelManager.Instance.LevelBounds.Contains(newPosition))
             return;
-        newPosition = LevelManager.instance.levelBounds.ClosestPoint(newPosition);
+        newPosition = LevelManager.Instance.LevelBounds.ClosestPoint(newPosition);
         SetPosition(newPosition);
     }
 

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class OnFireTimer : OnFireListener
 {
+    public BasicDino basicDino;
     public float timeOnFireSeconds;
 
     public override void SetOnFire()
@@ -13,6 +14,6 @@ public class OnFireTimer : OnFireListener
     private IEnumerator WaitBeforeDeath()
     {
         yield return new WaitForSeconds(timeOnFireSeconds);
-        Destroy(gameObject);
+        basicDino.Kill();
     }
 }
