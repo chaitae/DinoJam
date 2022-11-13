@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicDino: {fileID: 1777065131143716416}
-  timeOnFireSeconds: 10
+  timeOnFireSeconds: 7
 --- !u!114 &3806261271948918143
 MonoBehaviour:
   m_ObjectHideFlags: 0
