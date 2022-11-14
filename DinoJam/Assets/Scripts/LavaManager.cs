@@ -19,8 +19,20 @@ public class LavaManager: MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            StartLava(new Vector3Int(Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.y), 0));
+            TriggerLava(new Vector3Int(Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.y), 0));
         }
+    }
+
+    public void TriggerLava(Vector3Int position)
+    {
+        TrenchStartTile trenchTile = tilemap.GetTile<TrenchStartTile>(position);
+        if(trenchTile == null)
+        {
+            return;
+        }
+
+        tilemap.SetTile(position, trenchTile.lavaTile);
+        StartCoroutine(TriggerNeighbors(trenchTile.flowDelaySeconds, position));
     }
 
     public void StartLava(Vector3Int position)

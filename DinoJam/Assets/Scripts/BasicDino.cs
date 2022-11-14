@@ -10,10 +10,6 @@ public class BasicDino : MonoBehaviour
         Dead
     }
 
-    /*
-     * TODO:
-     * 2) Create a tile where lava can only be started from
-     */
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rigidbody;
     [Space]
