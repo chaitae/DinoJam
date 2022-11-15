@@ -38,6 +38,7 @@ public class TheGame : MonoBehaviour
 
     public void RetryLevel()
     {
+        DestroyCurrentLevel();
         StartLevel(currentLevel);
     }
 
