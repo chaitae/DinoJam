@@ -31,6 +31,7 @@ public class LavaManager: MonoBehaviour
             return;
         }
 
+        LevelManager.Instance.UserStarted();
         tilemap.SetTile(position, trenchTile.lavaTile);
         StartCoroutine(TriggerNeighbors(trenchTile.flowDelaySeconds, position));
     }
@@ -43,6 +44,7 @@ public class LavaManager: MonoBehaviour
             return;
         }
 
+        LevelManager.Instance.ResetInactivityTimer();
         tilemap.SetTile(position, trenchTile.lavaTile);
         StartCoroutine(TriggerNeighbors(trenchTile.flowDelaySeconds, position));
     }

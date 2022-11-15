@@ -1,6 +1,20 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/*
+ * TODO:
+ * 1) Create game manager
+ *    a) keeps track of levels/abilities unlocked
+ *    b) saves points between levels
+ *    c) Managers UI after rounds and upgrades and pausing and stuff
+ *    d) has a list of all the levels and upgrades and when they can be unlocked
+ * 2) LevelManager updated to:
+ *    a) Know when the level has started
+ *    b) know when "nothing has happened" after the level has started
+ *    c) notify the GameManager the level is down and how many points were earned
+ *    
+ */
+
 public class BasicDino : MonoBehaviour
 {
     private enum DinoState
@@ -53,12 +67,19 @@ public class BasicDino : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if(LevelManager.Instance.State == LevelManager.LevelState.Postgame)
+        {
+            rigidbody.velocity = Vector2.zero;
+            return;
+        }
+        if(state == DinoState.Fire)
+            LevelManager.Instance.ResetInactivityTimer();
+
         moveTimer += Time.fixedDeltaTime;
         if(moveTimer > maxMoveTimer)
             CalculateMovement();
         LavaTile lavaTile = tilemap.GetTile<LavaTile>(new Vector3Int(Mathf.FloorToInt(transform.position.x),
-            Mathf.FloorToInt(transform.position.y),
-            0));
+            Mathf.FloorToInt(transform.position.y), 0));
         if(lavaTile != null)
             SetOnFire();
         CheckPosition();
@@ -70,6 +91,7 @@ public class BasicDino : MonoBehaviour
             return;
         state = DinoState.Dead;
         CalculateMovement();
+        LevelManager.Instance.ResetInactivityTimer();
         foreach(OnDeathListener onDeathListener in onDeathListeners)
         {
             onDeathListener.Killed();
@@ -82,6 +104,7 @@ public class BasicDino : MonoBehaviour
             return;
         state = DinoState.Fire;
         spriteRenderer.color = fireColor;
+        LevelManager.Instance.ResetInactivityTimer();
         foreach(OnFireListener onFireListener in onFireListeners)
         {
             onFireListener.SetOnFire();

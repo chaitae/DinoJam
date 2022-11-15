@@ -35,4 +35,4 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   lavaTile: {fileID: 11400000, guid: ca5a3b7126fad4243aa06768dd616068, type: 2}
-  flowDelaySeconds: 0
+  flowDelaySeconds: 0.5

@@ -5053,6 +5053,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsPrefab: {fileID: 8018963771887109044, guid: 73dcec3b558048b4d9587be5d92100a6, type: 3}
   tilemap: {fileID: 572002604}
+  timeForRoundToEnd: 3
+  sceneCamera: {fileID: 749613816}
 --- !u!1001 &1777065129973366770
 PrefabInstance:
   m_ObjectHideFlags: 0
