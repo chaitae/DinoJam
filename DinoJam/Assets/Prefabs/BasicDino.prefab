@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1777065131143716417}
   - component: {fileID: 1777065131143716416}
+  - component: {fileID: 4154163837293865845}
   - component: {fileID: 8828953857701494160}
   - component: {fileID: 3873937397404336141}
   m_Layer: 0
@@ -150,6 +151,20 @@ MonoBehaviour:
   - {fileID: 7303984790361371586}
   - {fileID: 5327670498122943743}
   - {fileID: 4762535549798465850}
+--- !u!114 &4154163837293865845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777065131143716419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36eba0e0eccd34143b8aa70e2f195665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicDino: {fileID: 1777065131143716416}
+  strawHouse: {fileID: 0}
 --- !u!50 &8828953857701494160
 Rigidbody2D:
   serializedVersion: 4

@@ -15,3 +15,7 @@ MonoBehaviour:
   levels:
   - sceneName: Level1
     minPoints: 0
+  - sceneName: Level2
+    minPoints: 0
+  - sceneName: Level3
+    minPoints: 0

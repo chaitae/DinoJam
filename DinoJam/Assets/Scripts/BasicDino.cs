@@ -8,11 +8,6 @@ using UnityEngine.Tilemaps;
  *    b) saves points between levels
  *    c) Managers UI after rounds and upgrades and pausing and stuff
  *    d) has a list of all the levels and upgrades and when they can be unlocked
- * 2) LevelManager updated to:
- *    a) Know when the level has started
- *    b) know when "nothing has happened" after the level has started
- *    c) notify the GameManager the level is down and how many points were earned
- *    
  */
 
 public class BasicDino : MonoBehaviour
@@ -59,10 +54,10 @@ public class BasicDino : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        BasicDino otherDino = other.GetComponent<BasicDino>();
-        if (otherDino == null || state != DinoState.Fire)
+        FireTrigger fireTrigger = other.GetComponent<FireTrigger>();
+        if(fireTrigger == null || state != DinoState.Fire)
             return;
-        otherDino.SetOnFire();
+        fireTrigger.SetOnFire();
     }
 
     public void FixedUpdate()
