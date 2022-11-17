@@ -11,9 +11,8 @@ public class StrawHouse : MonoBehaviour
 
     private int fireCount = 0;
 
-    public void SetOnFire()
+    public void SetOnFire(bool givePoints = true)
     {
-        Debug.Log($"House fire! {fireCount}");
         if(fireCount >= FULL_FIRE)
             return;
         fireLevels[fireCount].gameObject.SetActive(true);
@@ -21,7 +20,7 @@ public class StrawHouse : MonoBehaviour
 
         if(fireCount >= FULL_FIRE)
         {
-            SpawnFireDinos();
+            HouseOnFire();
         }
     }
 
@@ -30,7 +29,13 @@ public class StrawHouse : MonoBehaviour
         FireTrigger fireTrigger = other.GetComponent<FireTrigger>();
         if (fireTrigger == null || fireCount < FULL_FIRE)
             return;
-        fireTrigger.SetOnFire();
+        fireTrigger.SetOnFire(false);
+    }
+
+    private void HouseOnFire()
+    {
+        LevelManager.Instance.RegisterPoints(transform.position, "Home", 75);
+        SpawnFireDinos();
     }
 
     private void SpawnFireDinos()
@@ -40,7 +45,7 @@ public class StrawHouse : MonoBehaviour
             BasicDino dino = Instantiate(dinoPrefab);
             dino.transform.parent = spawnPoint;
             dino.transform.localPosition = Vector3.zero;
-            dino.SetOnFire();
+            dino.SetOnFire(false);
         }
     }
 }

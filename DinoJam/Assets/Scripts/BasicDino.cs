@@ -93,7 +93,7 @@ public class BasicDino : MonoBehaviour
         }
     }
 
-    public void SetOnFire()
+    public void SetOnFire(bool givePoints = true)
     {
         if(state == DinoState.Fire || state == DinoState.Dead)
             return;
@@ -102,7 +102,7 @@ public class BasicDino : MonoBehaviour
         LevelManager.Instance.ResetInactivityTimer();
         foreach(OnFireListener onFireListener in onFireListeners)
         {
-            onFireListener.SetOnFire();
+            onFireListener.SetOnFire(givePoints);
         }
         CalculateMovement();
     }

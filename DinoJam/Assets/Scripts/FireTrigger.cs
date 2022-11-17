@@ -5,11 +5,11 @@ public class FireTrigger : MonoBehaviour
     public BasicDino basicDino;
     public StrawHouse strawHouse;
 
-    public void SetOnFire()
+    public void SetOnFire(bool givePoints = false)
     {
         if (basicDino != null)
-            basicDino.SetOnFire();
+            basicDino.SetOnFire(givePoints);
         if (strawHouse != null)
-            strawHouse.SetOnFire();
+            strawHouse.SetOnFire(givePoints);
     }
 }

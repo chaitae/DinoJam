@@ -6,7 +6,7 @@ public class OnFireTimer : OnFireListener
     public BasicDino basicDino;
     public float timeOnFireSeconds;
 
-    public override void SetOnFire()
+    public override void SetOnFire(bool givePoints = true)
     {
         StartCoroutine(WaitBeforeDeath());
     }

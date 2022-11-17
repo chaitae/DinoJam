@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dinoPrefab: {fileID: 1777065131143716416, guid: b5e0a2e98eeabbd449dbb535f6a4f443, type: 3}
-  dinosInside: 3
+  dinosInside: 5
   spawnPoint: {fileID: 1499501041150771289}
   fireLevels:
   - {fileID: 1911283914788517188}
